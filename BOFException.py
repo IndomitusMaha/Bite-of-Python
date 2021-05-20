@@ -29,7 +29,7 @@ except ShortInputException as ex:\
 else:
     print('Не было исключений.')"""
 
-
+"""
 import time
 try:
     f = open('poem.txt')
@@ -44,4 +44,8 @@ except KeyboardInterrupt:
 finally:
     f.close()
     print('(Очистка: Закрытие файла)')
-
+"""
+# pochti tozhe samoe
+with open("poem.txt") as f:
+    for line in f:
+        print(line, end='')
