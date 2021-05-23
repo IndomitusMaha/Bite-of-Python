@@ -7,70 +7,80 @@ def book():
     for i in Telefonnaya_kniga:
         print(i+" "+Telefonnaya_kniga[i])
 
-
-def naiti(chel):
+def find():
+    person = input('Who do you want to find? ')
+    found = 1
     for i in Telefonnaya_kniga:
-        if chel == i:
+        if person  == i:
             print(i+' '+Telefonnaya_kniga[i])
+            found = False
+    if found == 1:
+        print("Couldn't find this contact")
+
 
 def add():
     print(" You want to addd person in a book")
     name = input("Name: ")
     number = input("Number: ")
-    pass
-
-def dellete(chel):
     for i in Telefonnaya_kniga:
-        if chel == i:
-            a = i
-    del Telefonnaya_kniga[a]
-    book()
+        if i == name:
+            print("This contact already exsts")
+            break
+        else:
+            Telefonnaya_kniga[name] = str(number)
+            print("Contact added")
+            book()
+            break
 
-print("Avalible commands:\n Book\n Find\n Dellete")
-action = input("What do you want to do? ")
-
-if action == 'Book':
-    book()
-elif action == 'Find':
-    person = input('Who do you want to find? ')
-    naiti(person)
-elif action == 'Dellete':
+def dellete():
     person = input('Who do you want to dellate? ')
-    dellete(person)
-else:
-    print("There is no such command")
+    try:
+        for i in Telefonnaya_kniga:
+            if person == i:
+                a = i
+        del Telefonnaya_kniga[a]
+        print("Contact deleted")
+        book()
+    except:
+        print("No such contact found")
 
-"""
-class Kontact():
-    def __init__(self, name, number):
-        "Initializing Kontacts"
-        self.n = name
-        self.num = number
+def change():
+    who = input('Who\' number do you wnat to change? ')
+    newnum = input('New number ')
+    try:
+        for i in Telefonnaya_kniga:
+            if who == i:
+                Telefonnaya_kniga[i] = str(newnum)
+                break
+        print("Changes saved")
+        book()
+    except:
+        print("No such contact found")
 
-    def naiti(chel):
-        for i in Kontact:
-            if chel == i:
-                print(self.n + ' ' + self.num)
+def save():
+    a = []
+    for i in Telefonnaya_kniga:
+        a.append(i+' '+Telefonnaya_kniga[i])
+    a = str(a)
+    TK = open("Phone Book.txt", "w")
+    TK.write(a)
+    TK.close()
+    print("Izmenenya sohraneni")
 
-    def book(self):
-        pass
-
-    def add(self):
-        pass
-
-Names = [Mukagali, Rinad, ]
-
-print("Avalible commands:\n Book\n Find\n Add")
-action = input("What do you want to do? ")
-
-if action == 'Book':
-    Kontact.book()
-elif action == 'Find':
-    person = input('Who do you want to find? ')
-    Kontact.naiti(person)
-elif action == 'Add':
-    Kontact.add()
-    pass
-else:
-    print("There is no such command")"""
-
+while True:
+    print("\nAvalible commands:\n Book Find Dellete Add Change Save\n")
+    action = input("What do you want to do? ")
+    if action == 'Book':
+        book()
+    elif action == 'Find':
+        find()
+    elif action == 'Dellete':
+        dellete()
+    elif action == 'Add':
+        add()
+    elif action == 'Change':
+        change()
+    elif action == 'Save':
+        save()
+    else:
+        print("There is no such command")
